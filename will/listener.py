@@ -8,6 +8,8 @@ import settings
 from utils import Bunch
 from mixins import RosterMixin, RoomMixin, HipChatMixin
 
+from clint.textui import puts
+
 
 class WillXMPPClientMixin(ClientXMPP, RosterMixin, RoomMixin, HipChatMixin):
 
@@ -36,6 +38,7 @@ class WillXMPPClientMixin(ClientXMPP, RosterMixin, RoomMixin, HipChatMixin):
 
                 if settings.JOIN_ALL is True:
                     self.rooms = self.available_rooms
+                    puts('rooms = available_rooms')
                 else:
                     try:
                         self.rooms.append(self.available_rooms[r])
@@ -68,7 +71,7 @@ class WillXMPPClientMixin(ClientXMPP, RosterMixin, RoomMixin, HipChatMixin):
 
     def join_rooms(self, event):
         self.update_will_roster_and_rooms()
-        self.say('Rooms = {}'.format(self.rooms))
+        puts('Rooms = {}'.format(self.rooms))
 
         for r in self.rooms:
             if "xmpp_jid" in r:

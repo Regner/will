@@ -68,6 +68,7 @@ class WillXMPPClientMixin(ClientXMPP, RosterMixin, RoomMixin, HipChatMixin):
 
     def join_rooms(self, event):
         self.update_will_roster_and_rooms()
+        self.say('Rooms = {}'.format(self.rooms))
 
         for r in self.rooms:
             if "xmpp_jid" in r:

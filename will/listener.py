@@ -34,13 +34,16 @@ class WillXMPPClientMixin(ClientXMPP, RosterMixin, RoomMixin, HipChatMixin):
                 if not hasattr(self, "default_room"):
                     self.default_room = r
 
-                try:
-                    self.rooms.append(self.available_rooms[r])
-                except KeyError:
-                    logger.error(
-                        u'"{0}" is not an available room, ask'
-                        ' "@{1} what are the rooms?" for the full list.'
-                        .format(r, settings.HANDLE))
+                if settings.JOIN_ALL is True:
+                    self.rooms = self.available_rooms
+                else:
+                    try:
+                        self.rooms.append(self.available_rooms[r])
+                    except KeyError:
+                        logger.error(
+                            u'"{0}" is not an available room, ask'
+                            ' "@{1} what are the rooms?" for the full list.'
+                            .format(r, settings.HANDLE))
 
         self.nick = settings.NAME
         self.handle = settings.HANDLE

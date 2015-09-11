@@ -68,6 +68,9 @@ def import_settings(quiet=True):
                 warn("no ROOMS list found in the environment or config.  "
                      "This is ok - Will will just join all available rooms.")
                 settings["ROOMS"] = None
+                settings["JOIN_ALL"] = True
+        else:
+            settings["JOIN_ALL"] = False
 
         if "DEFAULT_ROOM" not in settings and "ROOMS" in settings and settings["ROOMS"] and len(settings["ROOMS"]) > 0:
             if not quiet:

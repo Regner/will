@@ -38,6 +38,7 @@ shelf.db
 .idea/*
 site
 docs/.DS_Store
+venv/
 
 # VIM swap files
 .*.sw[a-z]
